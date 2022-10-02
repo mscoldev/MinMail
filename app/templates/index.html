@@ -1,0 +1,12 @@
+{%extends './layout.html'%} {% block title %} {{data.title}}{% endblock %} {%block body %}
+<h1>{{data.wellcome}}</h1>
+{% if data.length > 0 %}
+<!-- Jinja 2 -->
+<ul>
+    {% for items in data.cursos %}
+    <li>{{items }}</li>
+    {% endfor %}
+</ul>
+{%else%}
+<h2>No existen cursos</h2>
+{% endif %} {% endblock %}
