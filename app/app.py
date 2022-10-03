@@ -1,6 +1,6 @@
-from doctest import debug
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from controllers.db import getUser
+from models import Message
 
 # Inicializando la aplicacion
 
@@ -44,12 +44,28 @@ def contactos(nombre):
 
 
 @app.route('/send')
-def send_mail():
+def send_mails():
     data = {
         'title': 'Send Mail'
     }
     return render_template('send.html', data=data)
 
+
+@app.route('/send/mail', methods=['POST'])
+def send_mail():
+    try:
+        to = request.form["to"]
+        subject = request.form["subject"]
+        msg= request.form["msg"]
+        print(to)
+        print(subject)
+        print(msg)
+        message = Message(to, subject, msg)
+        print(message)
+        return ('OK'), 200
+    except Exception: 
+        print("Error")
+        return('Error - Algo ha salido mal'), 500
 
 @app.route('/usuario')
 def usuario():
