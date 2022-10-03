@@ -3,7 +3,8 @@ class Message:
         self.to = to
         self.subject = subject
         self.message = message
-    
+        
+            
     def serialize(self):
         return{
             "to":self.to,
