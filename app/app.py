@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from controllers.db import getUser
-from models import Message
+from models.Message import *
 
 # Inicializando la aplicacion
 
@@ -57,12 +57,9 @@ def send_mail():
         to = request.form["to"]
         subject = request.form["subject"]
         msg= request.form["msg"]
-        print(to)
-        print(subject)
-        print(msg)
         message = Message(to, subject, msg)
-        print(message)
-        return ('OK'), 200
+        
+        return jsonify(message.serialize()),200
     except Exception: 
         print("Error")
         return('Error - Algo ha salido mal'), 500
