@@ -1,5 +1,6 @@
 from doctest import debug
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
+from controllers.db import getUser
 
 # Inicializando la aplicacion
 
@@ -24,13 +25,13 @@ def after_request(response):
 def index():
     cursos = ['PHP', 'Python', 'Java', 'JavaScript']
     data = {
-        'title': 'Home',
+        'title': 'Inicio Login',
         'wellcome': 'Saludos!',
         'cursos': cursos,
         'length': len(cursos)
     }
 # Enviamos la data al archivo HTML
-    return render_template('base.html', data=data)
+    return render_template('login.html', data=data)
 
 
 @app.route('/contactos/<nombre>')
@@ -40,6 +41,21 @@ def contactos(nombre):
         'nombre': nombre
     }
     return render_template('contacto.html', data=data)
+
+
+@app.route('/send')
+def send_mail():
+    data = {
+        'title': 'Send Mail'
+    }
+    return render_template('send.html', data=data)
+
+
+@app.route('/usuario')
+def usuario():
+    user = getUser('maser84')
+    return jsonify(user)
+
 
 # Un link directo ->
 

@@ -24,15 +24,15 @@ def getUser(username):
     conn = sql.connect(config('DATABASE_NAME'))
     cursor = conn.cursor()
     query = f"SELECT * FROM user WHERE username = '{username}'"
+    data = {}
     try:
         cursor.execute(query)
-        data = cursor.fetchone()
-        print(data)
+        user = cursor.fetchall()
+        print(user)
+        data['user'] = user
     except sql.Error as er:
+        # data['mensaje'] = 'Error'
         print('Error al realizar la consulta en SQLlite: %s' %
               (' '.join(er.args)))
     conn.close()
-
-
-if __name__ == '__main__':
-    getUser('maser84')
+    return (data)
