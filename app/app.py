@@ -85,7 +85,7 @@ def page_not_found(error):
     # return render_template('404.html'), 404
     return redirect(url_for('index'))  # Redireccionar a otra pagina
 
-#limpiado...
+
 if __name__ == '__main__':
     # Creacion de enlace por medio de una regla directa app.add_url_rule
     # app.add_url_rule('/query_string', view_func=query_string)
